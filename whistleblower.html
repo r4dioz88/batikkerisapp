@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BATIK KERIS - Whistleblower</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        .content {
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .navbar {
+            background: #007bff;
+            color: white;
+        }
+        
+        a {
+        text-decoration: none;
+        }
+        
+        .text-justify{
+            text-align: justify;
+        }
+        
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+  
+
+    <div class="content" id="main-content" style="width: 100%">
+        <div id="Whistleblower-section" class="card mt-2 shadow-sm">
+            <div class="card-header bg-danger text-white text-center">
+                <h5 class="mb-0">Pengaduan & Saran (Whistleblower)</h5>
+            </div>
+            <div class="card-body">
+                <form id="formAduan" class="p-1" onsubmit="event.preventDefault(); kirimAduan();">
+                    <div class="alert alert-info text-center" role="alert">
+                        Pembuatan surat di Bakesbangpol Deli Serdang tidak dipungut biaya alias gratis. Jika Anda mengalami atau mengetahui adanya pungutan liar (pungli) yang dilakukan oleh petugas kami dalam proses pembuatan surat, mohon segera laporkan melalui Kotak Aduan & Saran (Whistleblower) yang telah disediakan. Laporan Anda akan membantu kami dalam meningkatkan kualitas pelayanan dan memastikan transparansi dalam setiap proses administrasi.
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama</label>
+                        <input type="text" id="nama" class="form-control" placeholder="Masukkan nama Anda" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Masukkan email Anda" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Pilih Kategori Aduan</label>
+                        <select id="kategori" class="form-select" required>
+                            <option value="" disabled selected>Pilih kategori</option>
+                            <option value="whistleblower">Whistleblower</option>
+                            <option value="saran">Saran</option>
+                            <option value="kritik">Kritik</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="pesan" class="form-label">Pesan</label>
+                        <textarea id="pesan" rows="4" class="form-control" placeholder="Tulis aduan di sini" required></textarea>
+                    </div>
+                
+                    <div class="text-center">
+                        <button id="submitButton" type="submit" class="btn btn-primary w-100">
+                            <span id="buttonText"><i class="fa-solid fa-paper-plane"></i> Kirim Aduan</span>
+                            <span id="loadingSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        function kirimAduan() {
+            let button = document.getElementById("submitButton");
+            let spinner = document.getElementById("loadingSpinner");
+            let buttonText = document.getElementById("buttonText");
+        
+            // Menonaktifkan tombol & menampilkan loading
+            button.disabled = true;
+            spinner.classList.remove("d-none");
+            buttonText.classList.add("d-none");
+        
+            let formData = new FormData();
+            formData.append("nama", document.getElementById("nama").value);
+            formData.append("email", document.getElementById("email").value);
+            formData.append("kategori", document.getElementById("kategori").value);
+            formData.append("pesan", document.getElementById("pesan").value);
+        
+            fetch("https://script.google.com/macros/s/AKfycbwtr0JYLMi_rJ6bTpVgCT6wETJQ6NIXhrlRp1SnYrttWMfuq28y5jsKHQ1lcMZzO9Fg/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes("Sukses")) {
+                    alert("Aduan berhasil dikirim!");
+                    document.getElementById("formAduan").reset();
+                } else {
+                    alert("Terjadi kesalahan: " + data);
+                }
+            })
+            .catch(error => alert("Gagal mengirim aduan! Periksa koneksi internet atau izin Google Apps Script."))
+            .finally(() => {
+                // Mengembalikan tombol ke keadaan semula
+                button.disabled = false;
+                spinner.classList.add("d-none");
+                buttonText.classList.remove("d-none");
+            });
+        }
+    </script>
+</body>
+</html>
