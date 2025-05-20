@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BATIK KERIS - Ajukan Surat</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        .content {
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .navbar {
+            background: #007bff;
+            color: white;
+        }
+        
+        a {
+        text-decoration: none;
+        }
+        
+        .text-justify{
+            text-align: justify;
+        }
+        
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+   <nav class="navbar navbar-dark fixed-top">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="keris_100.png" alt="Logo" class="logo-img me-2">
+            <span>BATIK KERIS</span>
+        </a>
+            <div>
+                <a href="https://web.facebook.com/profile.php?id=100094593241893" target="_blank" class="text-light mx-2">
+                  <i class="fa-brands fa-lg fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/kesbangpolds/" target="_blank" class="text-light mx-2">
+                    <i class="fa-brands fa-lg fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content" id="main-content" style="width: 100%">
+        <div id="form-section" class="container mt-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5 class="mb-0">Ajukan Surat</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="jenisSurat" class="form-label">Jenis Surat:</label>
+                            <select id="jenisSurat" class="form-select">
+                                <option value="" selected disabled>Pilih Jenis Surat</option>
+                                <option value="riset">Surat Rekomendasi Riset</option>
+                                <option value="pkl">Surat Rekomendasi PKL</option>
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" onclick="redirectToForm()">Ajukan Surat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <div id="form-instructions" class="card mt-4 shadow-sm">
+            <div class="card-header bg-secondary text-white text-center">
+                <h5 class="mb-0">Cara Mengajukan Surat</h5>
+            </div>
+            <div class="card-body">
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">Pilih jenis surat yang ingin diajukan pada bagian <strong>"Pilih Jenis Surat"</strong>.</li>
+                    <li class="list-group-item">Klik tombol <strong>"Ajukan Surat"</strong> untuk melanjutkan ke formulir.</li>
+                    <li class="list-group-item">Isi formulir dengan informasi yang benar dan lengkap sesuai ketentuan.</li>
+                    <li class="list-group-item">Setelah semua data terisi, klik tombol <strong>"Kirim Pengajuan"</strong>.</li>
+                    <li class="list-group-item">Tim kami akan meninjau dan memproses pengajuan dalam waktu 1-2 hari kerja.</li>
+                    <li class="list-group-item">Anda akan menerima pemberitahuan melalui email yang telah Anda daftarkan beserta file PDF surat yang telah ditandatangani secara digital oleh <strong>Bakesbangpol Deli Serdang</strong>. File ini dapat dicetak dan digunakan sebagaimana surat resmi pada umumnya.</li>
+                </ol>
+                
+                <div class="mt-4 text-center">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalPersyaratanRisetPKL">Persyaratan Rekomendasi Riset & PKL</button>
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalPersyaratanOrmas">Persyaratan Terdaftar & Keberadaan Ormas/LSM</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Persyaratan Riset & PKL -->
+        <div class="modal fade" id="modalPersyaratanRisetPKL" tabindex="-1" aria-labelledby="modalPersyaratanRisetPKLLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPersyaratanRisetPKLLabel">Persyaratan Rekomendasi Riset & PKL</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>Surat Permohonan dari Institusi atau Universitas yang ditujukan Ke Bakesbangpol Deli Serdang.</li>
+                            <li>Fotokopi Kartu Identitas (KTP/KTM) Mahasiswa.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Persyaratan Terdaftar & Keberadaan Ormas/LSM -->
+        <div class="modal fade" id="modalPersyaratanOrmas" tabindex="-1" aria-labelledby="modalPersyaratanOrmasLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPersyaratanOrmasLabel">Persyaratan Terdaftar & Keberadaan Ormas/LSM</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>Surat Permohonan ditujukan kepada Kepala Badan Kesbangpol Deli Serdang.</li>
+                            <li>Akta Pendirian yang Memuat AD/ART dan Susunan Pengurus.</li>
+                            <li>Surat Pengesahan/Terdaftar dari Kementerian Hukum dan HAM atau Kemendagri.</li>
+                            <li>Surat Keterangan Domisili dari Lurah dan Camat.</li>
+                            <li>Pengisian Surat Pernyataan yang Disediakan Kesbangpol.</li>
+                            <li>Surat Rekomendasi dari Kementerian Agama (untuk Ormas Keagamaan).</li>
+                            <li>Surat Rekomendasi dari Kementerian terkait (untuk Ormas Kebudayaan).</li>
+                            <li>Surat Persetujuan dari Tokoh yang Dicantumkan dalam Kepengurusan (jika ada).</li>
+                            <li>Tujuan dan Program Kerja Organisasi.</li>
+                            <li>Biodata Pengurus (Ketua, Sekretaris, Bendahara).</li>
+                            <li>Pas Foto Berwarna Pengurus.</li>
+                            <li>Fotokopi KTP Pengurus.</li>
+                            <li>Surat Keputusan (SK) Susunan Pengurus.</li>
+                            <li>Foto Sekretariat Ormas (Tampak Depan dengan Nama Organisasi).</li>
+                            <li>Bukti Kepemilikan atau Surat Perjanjian Kontrak/Izin Pakai Sekretariat.</li>
+                            <li>Nomor Pokok Wajib Pajak (NPWP) atas Nama Ormas.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <footer class="text-center text-light p-1 bg-secondary mt-auto" style="font-size: 0.8rem;">
+        <div>Bakesbangpol Deli Serdang &copy; 2025 Batik Keris.</div>
+        <div>Developed by <a href="https://rainbowcodec.com/#home" class="text-light fw-bold" target="_blank">Rainbowcodec</a></div>
+    </footer>
+
+    <script>
+        function redirectToForm() {
+            var jenis = document.getElementById("jenisSurat").value;
+
+            var formLinks = {
+                "terdaftar": "https://forms.gle/LINK_SURAT_TERDAFTAR",
+                "keberadaan": "https://forms.gle/LINK_SURAT_KEBERADAAN",
+                "riset": "https://forms.gle/vog4EQEd7McQh7Pc6",
+                "pkl": "https://forms.gle/vog4EQEd7McQh7Pc6"
+            };
+
+            if (formLinks[jenis]) {
+                window.open(formLinks[jenis], "_blank");
+            } else {
+                alert("Pilih jenis surat terlebih dahulu.");
+            }
+        }
+    </script>
+</body>
+</html>
